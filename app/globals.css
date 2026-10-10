@@ -1,26 +1,82 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Brand */
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-slate-50);
+  color: var(--color-slate-900);
+}
+
+/* Leaflet: keep map controls above our bottom sheet's shadow but below dialogs. */
+.leaflet-container {
+  font: inherit;
+  z-index: 0;
+}
+.leaflet-control-zoom a {
+  width: 44px !important;
+  height: 44px !important;
+  line-height: 44px !important;
+  font-size: 22px !important;
+}
+
+/* Custom bus marker */
+.bus-marker {
+  background: transparent;
+  border: none;
+}
+.bus-marker__pin {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  background: var(--color-brand-600);
+  color: white;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.35);
+}
+.bus-marker--stale .bus-marker__pin {
+  background: var(--color-slate-500);
+}
+.bus-marker__label {
+  position: absolute;
+  top: 46px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: white;
+  color: var(--color-slate-900);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
